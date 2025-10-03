@@ -1,0 +1,7 @@
+node_modules
+.next
+.expo
+build
+dist
+coverage
+supabase/.temp

@@ -1,0 +1,106 @@
+{
+  "principles": [
+    "Prioritize Minimum Viable Product (MVP)",
+    "Prefer cloud services instead of building complex backends",
+    "Keep code simple, modular, and easy to iterate",
+    "Avoid over-engineering",
+    "Store all sensitive information in environment variables"
+  ],
+  "preferences": {
+    "explanation": "always include runnable example with explanation",
+    "env_file": ".env.local",
+    "doc_links": true,
+    "use_official_sdks": true
+  },
+  "prompts": {
+    "feature_prompt": "Please implement this feature, using mature cloud services (Firebase/Supabase/Auth0/Stripe etc.) instead of building complex custom backends.",
+    "refactor_prompt": "Please refactor the code with the goal of clarity and minimalism, avoiding over-engineering.",
+    "deploy_prompt": "Please provide configuration that can be deployed directly to Vercel/Netlify/Fly.io.",
+    "debug_prompt": "I encountered this error [xxx]. Please directly fix the code and explain the reason."
+  },
+  "agents": {
+    "design": [
+      "brand-guardian.md",
+      "ui-designer.md",
+      "ux-researcher.md"
+    ],
+    "engineering": [
+      "ai-engineer.md",
+      "backend-architect.md",
+      "devops-automator.md",
+      "frontend-developer.md",
+      "mobile-app-builder.md",
+      "rapid-prototyper.md",
+      "code-reviewer.md"
+    ],
+    "optimization": [
+      "workflow-optimizer.md"
+    ]
+  },
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "command": "playwright"
+      },
+      "firecrawl": {
+        "command": "firecrawl"
+      },
+      "github": {
+        "command": "gh",
+        "args": ["<REPLACE_WITH_GH_TOKEN>"]
+
+      },
+      
+      "context7": {
+        "command": "context7"
+        
+      }
+    }
+  },
+  "workflow": {
+    "phase_0_prd": {
+      "description": "Generate a PRD from project vision including goals, user personas, MVP features (priority ordered), and non-functional requirements.",
+      "prompt_template": "Please write a PRD including: goals, user personas, MVP features (priority ordered), and non-functional requirements.",
+      "rules": [
+        "PRD must be reviewed and approved by the user before moving to the next phase"
+      ],
+      "recommended_agents": ["ux-researcher.md", "brand-guardian.md", "ui-designer.md"]
+    },
+    "phase_1_guidelines_techstack": {
+      "description": "Create project development guidelines and a Tech Stack document.",
+      "guidelines": ["Code style", "Naming conventions", "File structure", "API naming rules"],
+      "tech_stack": ["Next.js", "Supabase", "Stripe", "Vercel"],
+      "env_file": ".env.local.example",
+      "prompt_template": "Based on the PRD, please write development guidelines including: code style, naming rules, file structure, API naming rules.",
+      "recommended_agents": ["backend-architect.md", "devops-automator.md", "frontend-developer.md"]
+    },
+    "phase_1_5_task_management": {
+      "description": "Break PRD into a task list, save to TASKS.md or tasks.json, and track progress.",
+      "task_format": ["id", "title", "description", "status (todo/in-progress/done)"],
+      "rules": [
+        "Mark task as in-progress when starting",
+        "Mark task as done after completion"
+      ],
+      "prompt_template": "Based on this PRD, break it into a task list (priority ordered), format: feature module → user story → task.",
+      "recommended_agents": ["workflow-optimizer.md"]
+    },
+    "phase_2_development_testing": {
+      "description": "Develop features from tasks.json, update task status, and add tests.",
+      "requirements": [
+        "Frontend: Jest + React Testing Library",
+        "Backend: Jest + Supertest",
+        "E2E: Cypress or Playwright"
+      ],
+      "rules": [
+        "All coding must come from pending tasks",
+        "Every completed task must have at least one test"
+      ],
+      "recommended_agents": ["frontend-developer.md", "backend-architect.md", "mobile-app-builder.md", "ai-engineer.md", "rapid-prototyper.md", "code-reviewer.md", "workflow-optimizer.md"]
+    },
+    "important": [
+      "Always follow workflow step by step",
+      "Do not skip testing",
+      "Do not start coding until PRD and tasks are clearly defined"
+    ]
+  }
+}
