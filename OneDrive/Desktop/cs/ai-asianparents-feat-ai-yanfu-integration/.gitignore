@@ -1,0 +1,13 @@
+node_modules/
+.local/
+deno
+node
+npm
+npx
+pnpx
+corepack
+yarn
+yarnpkg
+.DS_Store
+.env.local
+.supabase
